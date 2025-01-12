@@ -5,21 +5,33 @@ import CreateScreen from '../components/CreateScreen';
 import LowStock from '../components/LowStock';
 
 //Dummy data
-export const data = [
-  {id: 1, name: 'Wheat', stock: '5', unit: 'kg'},
-  {id: 2, name: 'Maize', stock: '20', unit: 'kg'},
-  {id: 3, name: 'Corn', stock: '10', unit: 'kg'},
-  {id: 4, name: 'Basmati Rice', stock: '125', unit: 'kg'},
-  {id: 5, name: 'Oil', stock: '50', unit: 'litres'},
-  {id: 6, name: 'Turmeric', stock: '12', unit: 'kg'},
-  {id: 7, name: 'Chilli', stock: '50  ', unit: 'kg'},
-  {id: 8, name: 'Mustard', stock: '7', unit: 'kg'},
-  {id: 9, name: 'Milk', stock: '30', unit: 'litres'},
-  {id: 10, name: 'Butter', stock: '500', unit: 'grams'},
-];
+// export const data = [
+//   {id: 1, name: 'Wheat', stock: '5', unit: 'kg'},
+//   {id: 2, name: 'Maize', stock: '20', unit: 'kg'},
+//   {id: 3, name: 'Corn', stock: '10', unit: 'kg'},
+//   {id: 4, name: 'Basmati Rice', stock: '125', unit: 'kg'},
+//   {id: 5, name: 'Oil', stock: '50', unit: 'litres'},
+//   {id: 6, name: 'Turmeric', stock: '12', unit: 'kg'},
+//   {id: 7, name: 'Chilli', stock: '50', unit: 'kg'},
+//   {id: 8, name: 'Mustard', stock: '7', unit: 'kg'},
+//   {id: 9, name: 'Milk', stock: '30', unit: 'litres'},
+//   {id: 10, name: 'Butter', stock: '500', unit: 'grams'},
+// ];
 
 const HomeScreen = () => {
   const [view, setview] = useState(0);
+  const [data, setdata] = useState([
+    {id: 1, name: 'Wheat', stock: '5', unit: 'kg'},
+    {id: 2, name: 'Maize', stock: '20', unit: 'kg'},
+    {id: 3, name: 'Corn', stock: '10', unit: 'kg'},
+    {id: 4, name: 'Basmati Rice', stock: '125', unit: 'kg'},
+    {id: 5, name: 'Oil', stock: '50', unit: 'litres'},
+    {id: 6, name: 'Turmeric', stock: '12', unit: 'kg'},
+    {id: 7, name: 'Chilli', stock: '50', unit: 'kg'},
+    {id: 8, name: 'Mustard', stock: '7', unit: 'kg'},
+    {id: 9, name: 'Milk', stock: '30', unit: 'litres'},
+    {id: 10, name: 'Butter', stock: '500', unit: 'grams'},
+  ]);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Dashboard</Text>
@@ -57,7 +69,7 @@ const HomeScreen = () => {
       </View>
       {view === 0 && <AllItems data={data} />}
       {view === 1 && <AllItems data={data.filter(item => item.stock < 20)} />}
-      {view === 2 && <CreateScreen />}
+      {view === 2 && <CreateScreen data={data} setdata={setdata} />}
     </View>
   );
 };
