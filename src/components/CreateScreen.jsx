@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Pressable,
   StyleSheet,
@@ -15,6 +16,12 @@ const CreateScreen = ({data, setdata}) => {
   const [edititemId, setedititemId] = useState(null);
 
   const additemHandler = () => {
+    // validations for emty fields
+    if (!itemName || !stock) {
+      Alert.alert('Error', 'Please enter item name and quantity');
+      return;
+    }
+
     const newItem = {
       id: Date.now(),
       name: itemName,
@@ -38,6 +45,11 @@ const CreateScreen = ({data, setdata}) => {
   };
 
   const updateitemHandler = () => {
+    // validations for emty fields
+    if (!itemName || !stock) {
+      Alert.alert('Error', 'Please enter item name and quantity');
+      return;
+    }
     setdata(
       data.map(item =>
         item.id === edititemId
@@ -47,6 +59,8 @@ const CreateScreen = ({data, setdata}) => {
     );
     setitemName('');
     setstock('');
+    setisEdit(false);
+    setedititemId(null);
   };
 
   return (
