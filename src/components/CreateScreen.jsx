@@ -11,6 +11,8 @@ import React, {useRef, useState} from 'react';
 const CreateScreen = ({data, setdata}) => {
   const [itemName, setitemName] = useState('');
   const [stock, setstock] = useState('');
+  const [isEdit, setisEdit] = useState(false);
+  const [edititemId, setedititemId] = useState(null);
 
   const additemHandler = () => {
     const newItem = {
@@ -20,6 +22,29 @@ const CreateScreen = ({data, setdata}) => {
     };
 
     setdata([...data, newItem]);
+    setitemName('');
+    setstock('');
+    setisEdit(false);
+  };
+
+  const deleteItemHandler = id => {
+    setdata(data.filter(item => item.id !== id));
+  };
+
+  const editItemHandler = item => {
+    setisEdit(true);
+    setitemName(item.name);
+    setedititemId(item.id);
+  };
+
+  const updateitemHandler = () => {
+    setdata(
+      data.map(item =>
+        item.id === edititemId
+          ? {...item, name: item.name, stock: stock}
+          : item,
+      ),
+    );
     setitemName('');
     setstock('');
   };
@@ -40,8 +65,12 @@ const CreateScreen = ({data, setdata}) => {
         value={stock}
         onChangeText={item => setstock(item)}
       />
-      <Pressable style={styles.btn} onPress={() => additemHandler()}>
-        <Text style={styles.btnText}>Add Item in Stock</Text>
+      <Pressable
+        style={styles.btn}
+        onPress={() => (isEdit ? updateitemHandler() : additemHandler())}>
+        <Text style={styles.btnText}>
+          {isEdit ? 'Edit items in stock' : 'Add items in stock'}
+        </Text>
       </Pressable>
 
       <View style={styles.headingContainer}>
@@ -66,10 +95,10 @@ const CreateScreen = ({data, setdata}) => {
               <Text style={styles.itemText}>
                 {item.stock} {item.unit}
               </Text>
-              <Pressable>
+              <Pressable onPress={() => editItemHandler(item)}>
                 <Text>Edit</Text>
               </Pressable>
-              <Pressable>
+              <Pressable onPress={() => deleteItemHandler(item.id)}>
                 <Text>Delete</Text>
               </Pressable>
             </View>
