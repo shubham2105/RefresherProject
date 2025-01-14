@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     padding: '4%',
   },
   title: {
-    fontSize: '20',
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'darkGray',
   },
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3.5,
     paddingHorizontal: 10,
     borderRadius: 50,
-    borderWidth: '0.8',
+    borderWidth: 0.8,
     borderColor: 'green',
   },
   btnText: {
